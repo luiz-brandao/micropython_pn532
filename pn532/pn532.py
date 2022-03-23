@@ -5,22 +5,7 @@
 This module will let you communicate with a PN532 RFID/NFC shield or breakout
 using I2C, SPI or UART.
 
-* Author(s): Original Raspberry Pi code by Tony DiCola, CircuitPython by ladyada
-* Author(s): MicroPython port by Luiz Brandao
-
-Implementation Notes
---------------------
-
-**Hardware:**
-
-* Adafruit `PN532 Breakout <https://www.adafruit.com/product/364>`_
-* Adafruit `PN532 Shield <https://www.adafruit.com/product/789>`_
-
-**Software and Dependencies:**
-
-* Adafruit CircuitPython firmware for the supported boards:
-  https://github.com/adafruit/circuitpython/releases
-* Adafruit's Bus Device library: https://github.com/adafruit/Adafruit_CircuitPython_BusDevice
+* Author(s): Original Raspberry Pi code by Tony DiCola, CircuitPython by ladyada, MicroPython by Luiz Brandao
 """
 
 import time
@@ -331,7 +316,7 @@ class PN532:
         """Call PN532 GetFirmwareVersion function and return a tuple with the IC,
         Ver, Rev, and Support values.
         """
-        response = self.call_function(_COMMAND_GETFIRMWAREVERSION, 4, timeout=1000)
+        response = self.call_function(_COMMAND_GETFIRMWAREVERSION, 4, timeout=500)
         if response is None:
             raise RuntimeError("Failed to detect the PN532")
         return tuple(response)

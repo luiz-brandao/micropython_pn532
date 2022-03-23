@@ -1,25 +1,18 @@
-# SPDX-FileCopyrightText: 2015-2018 Tony DiCola for Adafruit Industries
-#
-# SPDX-License-Identifier: MIT
-
 """
-``adafruit_pn532.uart``
+``pn532.uart``
 ====================================================
 
 This module will let you communicate with a PN532 RFID/NFC shield or breakout
 using UART.
 
 * Author(s): Original Raspberry Pi code by Tony DiCola, CircuitPython by ladyada,
-             refactor by Carter Nelson
+             refactor by Carter Nelson, MicroPython by Luiz Brandao
 
 """
 
-__version__ = "0.0.0-auto.0"
-__repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_PN532.git"
-
-
 import time
-from nfc.adafruit_pn532 import PN532, BusyError
+
+from pn532.pn532 import PN532, BusyError
 
 
 class PN532_UART(PN532):
@@ -65,6 +58,6 @@ class PN532_UART(PN532):
 
     def _write_data(self, framebytes):
         """Write a specified count of bytes to the PN532"""
-        #self._uart.reset_input_buffer()
-        self._uart.read()
+        while self._uart.any():
+            self._uart.read()
         self._uart.write(framebytes)
